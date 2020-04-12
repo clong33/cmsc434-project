@@ -1,0 +1,45 @@
+
+#title {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.picture-gallery {
+    background-color: blue;
+    height: 200px;
+    margin: 0% 20% 0% 20%;
+}
+
+.middle-container {
+    display: flex;
+}
+
+#middle-element {
+    flex: 60%;
+    vertical-align: middle;
+}
+
+#left-element {
+    flex: 20%;
+}
+
+#right-element {
+    flex: 20%;
+}
+
+
+.nav-bar {
+    border: solid;
+    border-radius: 6px;
+    margin: 0% 15% 0% 15%;
+    display: flex;
+      
+}
+  
+.column {
+    flex: 20%;
+    padding: 5px;
+}
+
