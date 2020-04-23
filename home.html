@@ -15,7 +15,7 @@
     <div class="w3-content w3-display-container" style="max-width:800px">
         <img class="mySlides" src="resources/iribecenter.jpg" style="width:100%">
         <img class="mySlides" src="resources/marylandM.png" style="width:100%">
-        <img class="mySlides" src="resources/iribecenter.jpg" style="width:100%">
+        <img class="mySlides" src="resources/iribeinside.jpg" style="width:100%">
         <div class="w3-center" style="width:100%">
             <span class="w3-badge demo w3-hover-white" onclick="currentDiv(1)"></span>
             <span class="w3-badge demo w3-hover-white" onclick="currentDiv(2)"></span>
@@ -41,7 +41,7 @@
     <div class="nav-bar">
 
         <div class="column">
-            <a href="test.html"><img src="resources/maps.png" alt="Maps" style="width:100%"></a>
+            <a href="map.html"><img src="resources/maps.png" alt="Maps" style="width:100%"></a>
         </div>
         <div class="column">
             <a href="test.html"><img src="resources/events.png" alt="Events" style="width:100%"></a>
@@ -64,7 +64,7 @@
     <script>
         var slideIndex = 1;
         showDivs(slideIndex);
-        setInterval(carousel(), 5000)
+        carousel()
 
         function currentDiv(n) {
             showDivs(slideIndex = n);
@@ -95,7 +95,7 @@
             slideIndex++;
             if (slideIndex > x.length) { slideIndex = 1 }
             x[slideIndex - 1].style.display = "block";
-            //setTimeout(carousel, 5000); // Change image every 2 seconds
+            setTimeout(carousel, 5000); // Change image every 2 seconds
         }
     </script>
 
