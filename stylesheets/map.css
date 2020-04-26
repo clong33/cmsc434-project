@@ -10,10 +10,11 @@
 #bodyContent {
     float: left;
     padding-right: 10px;
+    max-width: 350px;
 }
 
 #picture {
     float: left;
-    height: 200px;
+    height: 170px;
     padding-top: 20px;
 }

@@ -68,8 +68,10 @@
 
     <script>
         var slideIndex = 1;
+        let handle = setInterval(carousel, 5000); 
         showDivs(slideIndex);
-        carousel()
+        //carousel()
+        
 
         function currentDiv(n) {
             showDivs(slideIndex = n);
@@ -93,26 +95,27 @@
             }
             x[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " mywhite";
+            clearInterval(handle)
+            handle = setInterval(carousel, 5000)
         }
 
         function carousel() {
             var i;
             var x = document.getElementsByClassName("mySlides");
             var dots = document.getElementsByClassName("demo");
+
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none";
-                //dots[i].style.className = dots[i].style.className.replace(" mywhite", "")
+                dots[i].className = dots[i].className.replace(" mywhite", "")
             }
-            /*for (dot in dots) {
-                dot.style.className = dot.style.className.replace(" mywhite", "")
-            }*/
+            
             slideIndex++;
             if (slideIndex > x.length) {
                 slideIndex = 1
             }
             x[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].style.className += " mywhite";
-            setTimeout(carousel, 5000); 
+            dots[slideIndex - 1].className += " mywhite";
+            
         }
     </script>
 

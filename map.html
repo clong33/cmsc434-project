@@ -14,9 +14,13 @@
 <body>
     <div id="map"></div>
 
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFWldhC26ANjg_cViXM_S7miQssZY9px8"
+        type="text/javascript"></script>
+
+
     <script>
-        //fetch("https://maps.umd.edu/map/index.html?").then(data => {})
-        //<iframe id="map" src="https://maps.umd.edu/map/index.html?"></iframe>
+
         var mapBounds = new google.maps.LatLngBounds({
             lat: 38.980206,
             lng: -76.957450
@@ -28,12 +32,12 @@
             lat: 38.989196,
             lng: -76.936040
         }
-        var mckeldinBounds = new google.maps.LatLngBounds({
-            lat: 38.985658,
-            lng: -76.945585
+        var eppleyBounds = new google.maps.LatLngBounds({
+            lat: 38.993176,
+            lng: -76.946136
         }, {
-            lat: 38.986392,
-            lng: -76.944662
+            lat: 38.993993,
+            lng: -76.944366
         })
         var xfinityBounds = new google.maps.LatLngBounds({
             lat: 38.994848,
@@ -52,7 +56,7 @@
         var map;
         var directionsService;
         var directionsRenderer;
-        var markers;
+        var marker;
         var infoWindow;
 
         function initMap() {
@@ -63,84 +67,98 @@
                 },
                 zoom: 16,
                 minZoom: 16,
-                /*restriction: {
+                restriction: {
                     latLngBounds: mapBounds,
                     strictBounds: false
-                },*/
-                mapTypeId: 'satellite'
+                },
+                mapTypeId: 'satellite',
+                mapTypeControl: false
             });
-            markers = []
-            if (!(typeof infoWindow === 'undefined' || infoWindow === null)) {
+
+            if (typeof infoWindow !== 'undefined' && infoWindow !== null) {
                 infoWindow.close()
             }
 
-            //directionsService = new google.maps.DirectionsService();
-            //directionsRenderer = new google.maps.DirectionsRenderer();
-            //directionsRenderer.setMap(map)
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+            directionsRenderer.setMap(map)
 
-
-
-
-            new google.maps.Marker({
+            let iribeMarker = new google.maps.Marker({
                 position: iribeCoord,
                 map: map,
                 title: "You are here"
             })
 
-
-
-
+            new google.maps.InfoWindow({
+                content: "You are here"
+            }).open(map, iribeMarker)
 
             map.addListener('click', (mapsMouseEvent) => {
-                /*map.setZoom(17);
-                map.setCenter(mapsMouseEvent.latLng)
-                var marker = new google.maps.Marker({
-                    position: mapsMouseEvent.latLng,
-                    map: map
-                })
-
-                var request = {
-                    origin: iribeCoord,
-                    destination: mapsMouseEvent.latLng,
-                    travelMode: 'WALKING'
-                };
-                directionsService.route(request, function (result, status) {
-                    if (status == 'OK') {
-                        directionsRenderer.setDirections(result);
-                    }
-                });*/
-
-                for (marker in markers) {
+                if (typeof marker !== "undefined" && marker !== null) {
                     marker.setMap(null)
                 }
-                markers = []
 
-                if (mckeldinBounds.contains(mapsMouseEvent.latLng)) {
+                if (eppleyBounds.contains(mapsMouseEvent.latLng)) {
                     //display popup
-                    let marker = new google.maps.Marker({
+                    marker = new google.maps.Marker({
                         position: {
-                            lat: 38.985955,
-                            lng: -76.945048
+                            lat: 38.993576,
+                            lng: -76.945267
                         },
                         map: map
                     })
-                    markers.push(marker)
 
-                    let contentString = "mckeldin"
+                    var request = {
+                        origin: iribeCoord,
+                        destination: marker.getPosition(),
+                        travelMode: 'WALKING'
+                    };
+                    directionsService.route(request, function (result, status) {
+                        if (status == 'OK') {
+                            directionsRenderer.setDirections(result);
+                        }
+                    });
+
+
+                    let contentString = '<div id="content">' +
+                        '<div id = "bodyContent">' +
+                        '<h1 id = "firstHeading">Eppley Recreation Center</h1>' +
+                        '<h3>Upcoming Events</h3>' +
+                        '<ul>' +
+                        '<li>RecWell Ping Pong Tournament, February 3</li>' +
+                        '<li>Functional Fitness Group Class, February 3</li>' +
+                        '<li>Advanced Yoga Group Class, February 3</li>' +
+                        '</ul> ' +
+                        '<p>View more events on the <a href = "./test.html">calendar</a>.</p>' +
+                        '</div>' +
+                        '<div id = picture>' +
+                        '<img style = "height: 100%;" src = "./resources/eppley.jpg">' +
+                        '</div>' +
+                        '</div>'
 
                     infowindow = new google.maps.InfoWindow({
                         content: contentString
                     });
                     infowindow.open(map, marker)
                 } else if (xfinityBounds.contains(mapsMouseEvent.latLng)) {
-                    let marker = new google.maps.Marker({
+                    marker = new google.maps.Marker({
                         position: {
                             lat: 38.995454,
                             lng: -76.941403
                         },
                         map: map
                     })
-                    markers.push(marker)
+
+                    var request = {
+                        origin: iribeCoord,
+                        destination: marker.getPosition(),
+                        travelMode: 'WALKING'
+                    };
+                    directionsService.route(request, function (result, status) {
+                        if (status == 'OK') {
+                            directionsRenderer.setDirections(result);
+                        }
+                    });
 
                     let contentString = '<div id="content">' +
                         '<div id = "bodyContent">' +
@@ -159,20 +177,30 @@
                         '</div>'
 
 
-                    var infowindow = new google.maps.InfoWindow({
+                    infowindow = new google.maps.InfoWindow({
                         content: contentString
                     });
                     infowindow.open(map, marker)
                 } else if (stampBounds.contains(mapsMouseEvent.latLng)) {
 
-                    let marker = new google.maps.Marker({
+                    marker = new google.maps.Marker({
                         position: {
                             lat: 38.988124,
                             lng: -76.944723
                         },
                         map: map
                     })
-                    markers.push(marker)
+
+                    var request = {
+                        origin: iribeCoord,
+                        destination: marker.getPosition(),
+                        travelMode: 'WALKING'
+                    };
+                    directionsService.route(request, function (result, status) {
+                        if (status == 'OK') {
+                            directionsRenderer.setDirections(result);
+                        }
+                    });
 
                     let contentString = '<div id="content">' +
                         '<div id = "bodyContent">' +
@@ -190,19 +218,21 @@
                         '</div>' +
                         '</div>'
 
-
+                    infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+                    infowindow.open(map, marker)
                 } else {
-                    markers.push(new google.maps.Marker({
+                    marker = new google.maps.Marker({
                         position: mapsMouseEvent.latLng,
                         map: map
-                    }))
+                    })
                 }
             });
         }
+        initMap()
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB87qDWQ7WA-uKKC9XLLar9gYrcLWlNrAQ&callback=initMap"
-        type="text/javascript"></script>
+
 </body>
 
 </html>
