@@ -39,25 +39,30 @@
 
 
     <div class="nav-bar">
-
-        <div class="column">
-            <a href="map.html"><img src="resources/maps.png" alt="Maps" style="width:100%"></a>
-        </div>
-        <div class="column">
-            <a href="test.html"><img src="resources/events.png" alt="Events" style="width:100%"></a>
-        </div>
-        <div class="column">
-            <a href="test.html"><img src="resources/officelookup.png" alt="Officelookup" style="width:100%"></a>
-        </div>
-        <div class="column">
-            <a href="test.html"><img src="resources/floorplan.png" alt="Floorplan" style="width:100%"></a>
-        </div>
-        <div class="column">
-            <a href="test.html"><img src="resources/tutoring.png" alt="Mountains" style="width:100%"></a>
-        </div>
-        <div class="column">
-            <a href="test.html"><img src="resources/career.png" alt="Mountains" style="width:100%"></a>
-        </div>
+        <a class="column" href="test.html">
+            <img src="resources/maps.png" alt="Maps" style="width:100%">
+            <span class="nav-element-title">Campus Map</span>
+        </a>
+        <a class="column" href="test.html">
+            <img src="resources/events.png" alt="Events" style="width:100%">
+            <span class="nav-element-title">Events</span>
+        </a>
+        <a class="column" href="test.html">
+            <img src="resources/officelookup.png" alt="Officelookup" style="width:100%">
+            <span class="nav-element-title">Office Lookup</span>
+        </a>
+        <a class="column" href="test.html">
+            <img src="resources/floorplan.png" alt="Floorplan" style="width:100%">
+            <span class="nav-element-title">Floorplans</span>
+        </a>
+        <a class="column" href="test.html">
+            <img src="resources/tutoring.png" alt="Mountains" style="width:100%">
+            <span class="nav-element-title">Tutoring Resources</span>
+        </a>
+        <a class="column" href="test.html">
+            <img src="resources/career.png" alt="Mountains" style="width:100%">
+            <span class="nav-element-title">Career Services</span>
+        </a>
 
     </div>
 
@@ -74,28 +79,40 @@
             var i;
             var x = document.getElementsByClassName("mySlides");
             var dots = document.getElementsByClassName("demo");
-            if (n > x.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = x.length }
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            }
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none";
             }
             for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" w3-white", "");
+                dots[i].className = dots[i].className.replace(" mywhite", "");
             }
             x[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " w3-white";
+            dots[slideIndex - 1].className += " mywhite";
         }
 
         function carousel() {
             var i;
             var x = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none";
+                //dots[i].style.className = dots[i].style.className.replace(" mywhite", "")
             }
+            /*for (dot in dots) {
+                dot.style.className = dot.style.className.replace(" mywhite", "")
+            }*/
             slideIndex++;
-            if (slideIndex > x.length) { slideIndex = 1 }
+            if (slideIndex > x.length) {
+                slideIndex = 1
+            }
             x[slideIndex - 1].style.display = "block";
-            setTimeout(carousel, 5000); // Change image every 2 seconds
+            dots[slideIndex - 1].style.className += " mywhite";
+            setTimeout(carousel, 5000); 
         }
     </script>
 

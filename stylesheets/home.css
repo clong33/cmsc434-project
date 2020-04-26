@@ -37,10 +37,20 @@
     display: flex;
       
 }
+
+.nav-element-title {
+    text-align: center;
+    display: block;
+}
   
 .column {
     flex: 20%;
     padding: 5px;
+}
+
+a.column {
+    text-decoration: none; 
+    color: black;
 }
 
 .mySlides {
@@ -87,8 +97,8 @@
     border-radius:50%;
     height: 8px;
     width: 0px;
-    border:1px solid #ccc!important;
-    background-color:transparent!important;
+    border: 1px solid #ccc!important;
+    background-color:transparent;
 }
 
 .w3-hover-white:hover {
@@ -96,7 +106,7 @@
     background-color:#fff!important;
 }
 
-.white {
+.mywhite {
     background-color: white;
 }
 
