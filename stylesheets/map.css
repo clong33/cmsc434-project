@@ -1,6 +1,6 @@
 #map {
     width: 100%;
-    height: 600px;
+    height: 500px;
 }
 
 #content {
@@ -17,4 +17,27 @@
     float: left;
     height: 170px;
     padding-top: 20px;
+}
+
+.nav-bar {
+    border: solid;
+    border-radius: 6px;
+    margin: 10px 20% 0% 20%;
+    display: flex;
+
+}
+
+.nav-element-title {
+    text-align: center;
+    display: block;
+}
+
+.column {
+    flex: 20%;
+    padding: 5px;
+}
+
+a.column {
+    text-decoration: none;
+    color: black;
 }
