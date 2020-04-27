@@ -12,42 +12,44 @@
 </head>
 
 <body>
+    <input id="searchbox" type="text" placeholder="Search">
     <div id="map"></div>
 
     <div class="nav-bar">
-        <a class="column" href="test.html">
-            <img src="resources/maps.png" alt="Maps" style="width:100%">
+        <a class="column" href="map.html">
+            <img src="resources/map.svg" alt="Maps" style="width:100%">
             <span class="nav-element-title">Campus Map</span>
         </a>
-        <a class="column" href="test.html">
-            <img src="resources/events.png" alt="Events" style="width:100%">
+        <a class="column" href="calendar.html">
+            <img src="resources/calendar.svg" alt="Events" style="width:100%">
             <span class="nav-element-title">Events</span>
         </a>
-        <a class="column" href="test.html">
-            <img src="resources/officelookup.png" alt="Officelookup" style="width:100%">
+        <a class="column" href="officelookup.html">
+            <img src="resources/search.svg" alt="Officelookup" style="width:100%">
             <span class="nav-element-title">Office Lookup</span>
         </a>
         <a class="column" href="test.html">
-            <img src="resources/floorplan.png" alt="Floorplan" style="width:100%">
+            <img src="resources/floorplan3.png" alt="Floorplan" style="width:100%">
             <span class="nav-element-title">Floorplans</span>
         </a>
         <a class="column" href="test.html">
-            <img src="resources/tutoring.png" alt="Tutoring" style="width:100%">
+            <img src="resources/tutoring2.png" alt="Tutoring" style="width:100%">
             <span class="nav-element-title">Tutoring Resources</span>
         </a>
         <a class="column" href="test.html">
-            <img src="resources/career.png" alt="Career" style="width:100%">
+            <img src="resources/career1.png" alt="Career" style="width:100%">
             <span class="nav-element-title">Career Services</span>
         </a>
 
     </div>
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFWldhC26ANjg_cViXM_S7miQssZY9px8"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFWldhC26ANjg_cViXM_S7miQssZY9px8&libraries=places"
         type="text/javascript"></script>
 
 
     <script>
+
 
         var mapBounds = new google.maps.LatLngBounds({
             lat: 38.980206,
@@ -84,8 +86,8 @@
         var map;
         var directionsService;
         var directionsRenderer;
-        var marker;
         var infoWindow;
+        var markers = [];
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -103,10 +105,6 @@
                 mapTypeControl: false
             });
 
-            if (typeof infoWindow !== 'undefined' && infoWindow !== null) {
-                infoWindow.close()
-            }
-
             directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer({ suppressMarkers: true });
             directionsRenderer.setMap(map)
@@ -121,20 +119,194 @@
                 content: "You are here"
             }).open(map, iribeMarker)
 
-            map.addListener('click', (mapsMouseEvent) => {
-                if (typeof marker !== "undefined" && marker !== null) {
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('searchbox');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function () {
+                searchBox.setBounds(map.getBounds());
+            });
+
+
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+                for (marker of markers) {
                     marker.setMap(null)
                 }
+                markers = []
+
+                directionsRenderer.setDirections({routes: []});
+
+                if (typeof infoWindow !== 'undefined' && infoWindow !== null) {
+                    infoWindow.close()
+                }
+
+                if (places.length == 0) {
+                    console.log("no places returned")
+                    return;
+                }
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function (place) {
+                    if (place['name'] == "XFINITY Center") {
+                        let marker = new google.maps.Marker({
+                            map: map,
+                            position: place.geometry.location
+                        })
+                        markers.push(marker)
+
+
+                        var request = {
+                            origin: iribeCoord,
+                            destination: marker.getPosition(),
+                            travelMode: 'WALKING'
+                        };
+                        directionsService.route(request, function (result, status) {
+                            if (status == 'OK') {
+                                directionsRenderer.setDirections(result);
+                            }
+                        });
+
+                        let contentString = '<div id="content">' +
+                            '<div id = "bodyContent">' +
+                            '<h1 id = "firstHeading">Xfinity Center</h1>' +
+                            '<h3>Upcoming Events</h3>' +
+                            '<ul>' +
+                            '<li>Mens Basketball vs. Purdue, February 3</li>' +
+                            '<li>Wrestling vs. Penn State, February 5</li>' +
+                            '<li>Womens Basketball vs. Michigan, February 6</li>' +
+                            '</ul> ' +
+                            '<p>View more events on the <a href = "./calendar.html">calendar</a>.</p>' +
+                            '</div>' +
+                            '<div id = picture>' +
+                            '<img style = "height: 100%;" src = "./resources/xfinitygame.jpg">' +
+                            '</div>' +
+                            '</div>'
+
+
+                        infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+                        infowindow.open(map, marker)
+
+
+                    } else if (place['name'] == "Eppley Recreation Center") {
+                        let marker = new google.maps.Marker({
+                            map: map,
+                            position: place.geometry.location
+                        })
+                        markers.push(marker)
+
+
+                        var request = {
+                            origin: iribeCoord,
+                            destination: place.geometry.location,
+                            travelMode: 'WALKING'
+                        };
+                        directionsService.route(request, function (result, status) {
+                            if (status == 'OK') {
+                                directionsRenderer.setDirections(result);
+                            }
+                        });
+
+
+                        let contentString = '<div id="content">' +
+                            '<div id = "bodyContent">' +
+                            '<h1 id = "firstHeading">Eppley Recreation Center</h1>' +
+                            '<h3>Upcoming Events</h3>' +
+                            '<ul>' +
+                            '<li>RecWell Ping Pong Tournament, February 3</li>' +
+                            '<li>Functional Fitness Group Class, February 3</li>' +
+                            '<li>Advanced Yoga Group Class, February 3</li>' +
+                            '</ul> ' +
+                            '<p>View more events on the <a href = "./calendar.html">calendar</a>.</p>' +
+                            '</div>' +
+                            '<div id = picture>' +
+                            '<img style = "height: 100%;" src = "./resources/eppley.jpg">' +
+                            '</div>' +
+                            '</div>'
+
+                        infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+                        infowindow.open(map, marker)
+
+                    } else if (place['name'] == "Adele H. Stamp Student Union") {
+                        let marker = new google.maps.Marker({
+                            map: map,
+                            position: place.geometry.location
+                        })
+                        markers.push(marker)
+
+                        var request = {
+                            origin: iribeCoord,
+                            destination: marker.getPosition(),
+                            travelMode: 'WALKING'
+                        };
+                        directionsService.route(request, function (result, status) {
+                            if (status == 'OK') {
+                                directionsRenderer.setDirections(result);
+                            }
+                        });
+
+                        let contentString = '<div id="content">' +
+                            '<div id = "bodyContent">' +
+                            '<h1 id = "firstHeading">Stamp Student Union</h1>' +
+                            '<h3>Upcoming Events</h3>' +
+                            '<ul>' +
+                            '<li>Movie Night at Hoth Theater: Parasite, February 3</li>' +
+                            '<li>College of Agriculture and Natural Resources Spring Career Fair, February 5</li>' +
+                            '<li>Smith School of Business Networking Event, February 6</li>' +
+                            '</ul> ' +
+                            '<p>View more events on the <a href = "./calendar.html">calendar</a>.</p>' +
+                            '</div>' +
+                            '<div id = picture>' +
+                            '<img style = "height: 100%;" src = "./resources/stamp.jpeg">' +
+                            '</div>' +
+                            '</div>'
+
+                        infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+                        infowindow.open(map, marker)
+
+                    }
+
+
+
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+
+
+            map.addListener('click', (mapsMouseEvent) => {
+                
+                for (marker of markers) {
+                    marker.setMap(null)
+                }
+                markers = []
+                directionsRenderer.setDirections({routes: []});
 
                 if (eppleyBounds.contains(mapsMouseEvent.latLng)) {
                     //display popup
-                    marker = new google.maps.Marker({
+                    let marker = new google.maps.Marker({
                         position: {
                             lat: 38.993576,
                             lng: -76.945267
                         },
                         map: map
                     })
+                    markers.push(marker)
 
                     var request = {
                         origin: iribeCoord,
@@ -157,7 +329,7 @@
                         '<li>Functional Fitness Group Class, February 3</li>' +
                         '<li>Advanced Yoga Group Class, February 3</li>' +
                         '</ul> ' +
-                        '<p>View more events on the <a href = "./test.html">calendar</a>.</p>' +
+                        '<p>View more events on the <a href = "./calendar.html">calendar</a>.</p>' +
                         '</div>' +
                         '<div id = picture>' +
                         '<img style = "height: 100%;" src = "./resources/eppley.jpg">' +
@@ -169,13 +341,14 @@
                     });
                     infowindow.open(map, marker)
                 } else if (xfinityBounds.contains(mapsMouseEvent.latLng)) {
-                    marker = new google.maps.Marker({
+                    let marker = new google.maps.Marker({
                         position: {
                             lat: 38.995454,
                             lng: -76.941403
                         },
                         map: map
                     })
+                    markers.push(marker)
 
                     var request = {
                         origin: iribeCoord,
@@ -197,7 +370,7 @@
                         '<li>Wrestling vs. Penn State, February 5</li>' +
                         '<li>Womens Basketball vs. Michigan, February 6</li>' +
                         '</ul> ' +
-                        '<p>View more events on the <a href = "./test.html">calendar</a>.</p>' +
+                        '<p>View more events on the <a href = "./calendar.html">calendar</a>.</p>' +
                         '</div>' +
                         '<div id = picture>' +
                         '<img style = "height: 100%;" src = "./resources/xfinitygame.jpg">' +
@@ -211,13 +384,16 @@
                     infowindow.open(map, marker)
                 } else if (stampBounds.contains(mapsMouseEvent.latLng)) {
 
-                    marker = new google.maps.Marker({
+                    console.log("successss")
+
+                    let marker = new google.maps.Marker({
                         position: {
                             lat: 38.988124,
                             lng: -76.944723
                         },
                         map: map
                     })
+                    markers.push(marker)
 
                     var request = {
                         origin: iribeCoord,
@@ -239,7 +415,7 @@
                         '<li>College of Agriculture and Natural Resources Spring Career Fair, February 5</li>' +
                         '<li>Smith School of Business Networking Event, February 6</li>' +
                         '</ul> ' +
-                        '<p>View more events on the <a href = "./test.html">calendar</a>.</p>' +
+                        '<p>View more events on the <a href = "./calendar.html">calendar</a>.</p>' +
                         '</div>' +
                         '<div id = picture>' +
                         '<img style = "height: 100%;" src = "./resources/stamp.jpeg">' +
@@ -251,10 +427,11 @@
                     });
                     infowindow.open(map, marker)
                 } else {
-                    marker = new google.maps.Marker({
+                    let marker = new google.maps.Marker({
                         position: mapsMouseEvent.latLng,
                         map: map
                     })
+                    markers.push(marker)
                 }
             });
         }
