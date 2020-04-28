@@ -1,2 +1,2 @@
 # cmsc434-project
-A website mock up for CMSC434
+A working website for kiosks in the Iribe Center at UMD.
