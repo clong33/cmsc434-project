@@ -51,7 +51,7 @@ h1 {
 }
 
 .popup .close:hover {
-    color: #06D85F;
+    color: rgb(107, 185, 234);
 }
 
 .popup .content {
