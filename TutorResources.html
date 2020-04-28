@@ -1,0 +1,315 @@
+<!doctype html>
+
+<html lang="en">
+
+<style>
+    h1 {
+        text-align: center;
+        font-family: Tahoma, Arial, sans-serif;
+        color: #06D85F;
+        margin: 80px 0;
+    }
+
+    .box {
+        width: 40%;
+        margin: 0 auto;
+        padding: 35px;
+        background-clip: padding-box;
+        text-align: center;
+        position:absolute;
+        bottom:250px;
+        left:100px;
+        width:300px;
+        height:200px;
+        line-height:30px;
+        text-align:center;
+        background:rgb(218, 69, 69);
+        color:white;
+        font-size:30px;
+        display: block;
+    }
+
+        .box2 {
+        width: 40%;
+        margin: 0 auto;
+        padding: 35px;
+        background-clip: padding-box;
+        text-align: center;
+        position:absolute;
+        bottom:250px;
+        left:500px;
+        width:300px;
+        height:200px;
+        line-height:30px;
+        text-align:center;
+        background:rgb(218, 69, 69);
+        color:white;
+        font-size:30px;
+        display: block;
+    }
+
+        .box3 {
+        width: 40%;
+        margin: 0 auto;
+        padding: 35px;
+        background-clip: padding-box;
+        text-align: center;
+        position:absolute;
+        bottom:250px;
+        left:900px;
+        width:300px;
+        height:200px;
+        line-height:30px;
+        text-align:center;
+        background:rgb(218, 69, 69);
+        color:white;
+        font-size:30px;
+        display: block;
+    }
+
+    .button {
+        font-size: 15px;
+        padding: 15px;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 20px/50px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+    }
+
+    .button1 {
+        font-size: 12px;
+        padding: 10px;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 20px/50px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+        margin:0px; 
+    }
+
+    .button:hover {
+        background: #fff;
+        color: #000;
+    }
+
+    .button1:hover {
+        background: #fff;
+        color: #000;
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .overlay:target {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .popup {
+        margin: 70px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        width: 30%;
+        position: relative;
+        transition: all 5s ease-in-out;
+    }
+
+    .popup h2 {
+        margin-top: 0;
+        color: #333;
+        font-family: Tahoma, Arial, sans-serif;
+    }
+
+    .popup .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        transition: all 200ms;
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .popup .close:hover {
+        color: #06D85F;
+    }
+
+    .popup .content {
+        max-height: 30%;
+        overflow: auto;
+    }
+
+    @media screen and (max-width: 700px) {
+        .box {
+            width: 70%;
+        }
+
+        .popup {
+            width: 70%;
+        }
+    }
+</style>
+
+<html>
+
+<head>
+    <p style="font-family:georgia,garamond,serif;font-size:40px;">
+        <img src="resources/umdlogo.png" alt="my picture" height=100 width=100 style="float: left;">
+        <br>&nbsp Tutor Resources
+    </p>
+
+    <link rel="icon" href="resources/umdlogo.png" type="image/x-icon">
+    <hr>
+</head>
+
+<body>
+    <div class="box">Engineering <br>
+        <br>
+        <a class="button" href="#popup1">School of Engineering Support</a>
+        <br><br>
+        <a class="button" href="#popup2">Keystone Center</a>
+    </div>
+
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <h2>The A. James Clark School of Engineering Support</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                Monday-Friday 8:30am-4:30pm<br>
+                1131S Glenn L. Martin Hall<br>
+                4298 Campus Drive<br>
+                College Park, MD 20742<br>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup2" class="overlay">
+        <div class="popup">
+            <h2>The Keystone Center Support</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                The Teaching Fellows Program provides student-to-student mentoring for new engineering students and
+                teaching experience
+                for upper level engineering students.
+                2108 J.M. Patterson Building #083
+            </div>
+        </div>
+    </div>
+
+    <div class="box2">Computer Science<br>
+        <br>
+        <a class="button" href="#popup3">Guided Study Session</a>
+        <br><br>
+        <a class="button" href="#popup4">MCWIC</a>
+    </div>
+
+    <div id="popup3" class="overlay">
+        <div class="popup">
+            <h2>Guided Study Session program(GSS)</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                CMSC 131: Mondays at 11am and Wednesdays at 7pm<br>
+                CMSC 132: Mondays at 5pm and Thursdays at 11am<br>
+                CMSC 216: Tuesdays at 2pm and Wednesdays at 6pm<br>
+                CMSC 250: Tuesdays at 5pm and Wednesdays at 11am<br>
+                CMSC 330: Tuesdays at 6pm and Wednesdays at 1pm<br>
+                CMSC 351: Mondays at 4pm and Wednesdays at 12pm<br>
+                <br>
+                IMPORTANT- TUTORING IS MOVING ONLINE for Spring 2020<br>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup4" class="overlay">
+        <div class="popup">
+            <h2>The Maryland Center for Women in Computing</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                - Tutoring<br>
+                - Peer Mentoring<br>
+                - Student Organization Support<br>
+                - DICE Lounge<br>
+                - Diversity Conference Support including the Grace Hopper Celebration<br>
+                - Tech + Research<br>
+                <br>
+                Available in DICE lounge(IRB1104) for students in computing to meet, study, and connect.
+            </div>
+        </div>
+    </div>
+
+    <div class="box3">Other<br>
+        <br>
+        <a class="button1" href="#popup5">Veterans STEM Assistance Program</a>
+        <br>
+        <a class="button1" href="#popup6">The Counseling Center</a>
+        <br>
+        <a class="button1" href="#popup7">Academic Success and Tutorial Services</a>
+
+    </div>
+
+    <div id="popup5" class="overlay">
+        <div class="popup">
+            <h2>Veterans STEM Assistance Program</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                veteran student life's veterans stem assistance program works with student veterans seeking to meet
+                their academic need
+                in the stem field.
+                <br><br>
+                -session in veteran center<br>
+                -lunch and learn workshop to enhance study skills
+            </div>
+        </div>
+    </div>
+
+    <div id="popup6" class="overlay">
+        <div class="popup">
+            <h2>The Counseling Center</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                Business Hours: 8:30 a.m to 4:30 p.m. ( Monday through Friday)<br>
+                After-Hours Crisis Support Phone Services: 4:30 pm to 8:30 am weekdays, 24 hours/day over the weekend<br>
+                Phone Number: (301) 314-7651.<br>
+                Please call to make an appointment.
+            </div>
+        </div>
+    </div>
+
+    <div id="popup7" class="overlay">
+        <div class="popup">
+            <h2>Academic Success and Tutorial Services</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                ASTS can provide tutoring for up to 5 students per session. We are not obligated to provide one-on-one
+                tutoring to
+                students. If a student signs up for the same session you are in, they are obligated to receive tutoring
+                as well.
+                <br>
+                List of courses provide:<br>
+                ECON 101, 102<br>
+                STAT 100, 400<br>
+                BSCI 220, 221, 230, 340<br>
+                BSCI 170, 132, 202, 233<br>
+                CHEM 131, 135, 231, 241<br>
+                <br>
+                ASTS will be providing online tutoring for the remainder of the Spring 2020 semester
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
