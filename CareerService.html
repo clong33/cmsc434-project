@@ -3,66 +3,93 @@
 <html lang="en">
 
 <style>
-    .homepage{
-    font-size: 20px;
-    line-height: 1.8;
+    body
+    {
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        /* color: #444444;
+        font-size: 9pt;
+        background-color: #FAFAFA; */
+    }
+    #title {
+        height: 150px;
+        font-size: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     #lefttop {
         position:absolute;
-        bottom:350px;
-        left:100px;
+        bottom:400px;
+        left:50px;
         width:300px;
-        height:200px;
+        height:180px;
         line-height:30px;
         text-align:center;
-        background:rgb(218, 69, 69);
+        background-color: #f6f6f6; /* Grey background color */
         color:white;
         font-size:30px;
     }
     #leftdown {
         position:absolute;
-        bottom:50px;
-        left:100px;
+        bottom:400px;
+        left:400px;
         width:300px;
-        height:200px;
+        height:180px;
         line-height:30px;
         text-align:center;
-        background:rgb(218, 69, 69);
+        background-color: #f6f6f6; /* Grey background color */
         font-size:30px;
     }
     #rightdown {
         position:absolute;
-        bottom:50px;
-        left:500px;
+        bottom:400px;
+        left:750px;
         width:300px;
-        height:200px;
+        height:180px;
         line-height:30px;
         text-align:center;
-        background:rgb(218, 69, 69);
+        background-color: #f6f6f6; /* Grey background color */
         font-size:30px;
     }
     #righttop {
         position:absolute;
-        bottom:350px;
-        left:500px;
+        bottom:400px;
+        left:1100px;
         width:300px;
-        height:200px;
+        height:180px;
         line-height:30px;
         text-align:center;
-        background:rgb(218, 69, 69);
+        background-color: #f6f6f6; /* Grey background color */
         font-size:30px;
+    }
+    .nav-bar {
+        border: solid;
+        border-radius: 6px;
+        margin: 23% 10% 0% 10%;
+        display: flex;
+    }
+
+    .nav-element-title {
+        text-align: center;
+        display: block;
+    }
+    
+    .column {
+        flex: 20%;
+        padding: 5px;
+    }
+
+    a {
+        text-decoration: none; 
+        color: black;
     }
 </style>
 
 
 <head>
-    <p style="font-family:georgia,garamond,serif;font-size:40px;">
-        <img src="resources/umdlogo.png" alt="my picture" height=100 width=100 style="float: left;">
-        <br>&nbsp Career Services:
-    </p>
-
-    <link rel="icon" href="resources/umdlogo.png" type="image/x-icon">
-    <hr>
+    <h1 id="title">
+        Career Services
+    </h1>
 </head>
 
 
@@ -75,6 +102,38 @@
             Visits</a></button>
     <button id='rightdown'><a href="https://careers.umd.edu/" font-size: 40px;>Hornbake<br>
             Career Services</a></button>
+
+            <div class="nav-bar">
+                <a class="column" href="home.html">
+                    <img src="resources/home.png" alt="Home" style="width:100%">
+                    <span class="nav-element-title">Home</span>
+                </a>
+                <a class="column" href="map.html">
+                    <img src="resources/map.png" alt="Maps" style="width:100%">
+                    <span class="nav-element-title">Campus Map</span>
+                </a>
+                <a class="column" href="calendar.html">
+                    <img src="resources/calendar.png" alt="Events" style="width:100%">
+                    <span class="nav-element-title">Events</span>
+                </a>
+                <a class="column" href="officelookup.html">
+                    <img src="resources/search.png" alt="Officelookup" style="width:100%">
+                    <span class="nav-element-title">Directory Lookup</span>
+                </a>
+                <a class="column" href="floorplan.html">
+                    <img src="resources/floorplan3.png" alt="Floorplan" style="width:100%">
+                    <span class="nav-element-title">Floorplans</span>
+                </a>
+                <a class="column" href="TutorResources.html">
+                    <img src="resources/tutoring2.png" alt="Tutoring" style="width:100%">
+                    <span class="nav-element-title">Tutoring Resources</span>
+                </a>
+                <a class="column" href="CareerService.html">
+                    <img src="resources/career1.png" alt="Career" style="width:100%">
+                    <span class="nav-element-title">Career Services</span>
+                </a>
+        
+            </div>
 </body>
 
 </html>

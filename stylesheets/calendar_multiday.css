@@ -1,7 +1,14 @@
 /**
  * calendar calendar table styles
  */
-
+ body
+ {
+     font-family: 'Helvetica', 'Arial', sans-serif;
+     color: black;
+     /* font-size: 9pt;
+     background-color: #FAFAFA; */
+ }
+ 
 .calendar-calendar tr.odd,
 .calendar-calendar tr.even {
     background-color: #fff;
@@ -10,7 +17,7 @@
 .calendar-calendar table {
     border-collapse: collapse;
     border-spacing: 0;
-    margin: 0 auto;
+    margin: 0 20%;
     padding: 0;
     width: 100%;
 }
@@ -457,8 +464,8 @@ table.calendar-legend tr.even .stripe {
 .calendar-calendar .month-view .full tr.date-box td,
 .calendar-calendar .month-view .full tr.multi-day,
 .calendar-calendar .month-view .full tr.multi-day td {
-    height: 19px;
-    max-height: 19px;
+    height: 25px;
+    max-height: 25px;
 }
 
 .calendar-calendar .month-view .full tr.single-day .no-entry,
@@ -897,4 +904,30 @@ ul.calendar-links,
 .year-view div.month-view div.date-nav {
     background-color: #DFDFDF;
     min-height: 20px;
+}
+
+.col-md-8 {
+    width: 75%;
+}
+
+.nav-bar {
+    border: solid;
+    border-radius: 6px;
+    margin: 3% 10% 0% 10%;
+    display: flex;
+}
+
+.nav-element-title {
+    text-align: center;
+    display: block;
+}
+  
+.column {
+    flex: 20%;
+    padding: 5px;
+}
+
+a.column {
+    text-decoration: none; 
+    color: black;
 }

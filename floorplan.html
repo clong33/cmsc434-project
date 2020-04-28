@@ -1,0 +1,105 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Directory Lookup</title>
+    <meta name="Shashwat Kapoor" content="Home page">
+    <link rel="stylesheet" type="text/css" href="./stylesheets/office.css" />
+
+</head>
+
+<body>
+	<h1 id="title" style="height: 70px;">
+		Floor Plan of IRB
+	</h1>
+
+	<div class="row">
+		<div class="col left">
+			<!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."> -->
+
+			<ul id="myUL">
+			<li><a href="#" onclick="showImage1();">Ground Floor</a></li>
+			<li><a href="#" onclick="showImage2();">First Floor</a></li>
+			<li><a href="#" onclick="showImage3();">Other Floors</a></li>
+			</ul>
+		</div>
+		<div class="col right" style="position:relative">
+			<img id="ground" src="resources/gfloor.png" style="position: absolute; top: 0; left: 0; visibility:hidden; width: 60%;"/>
+			<img id="first" src="resources/ffloor.png" style="position: absolute; top: 0; left: 0; visibility:hidden; width: 60%;"/>
+			<img id="other" src="resources/ofloor.png" style="position: absolute; top: 0; left: 0; visibility:hidden; width: 60%;"/>
+		</div>
+	</div>
+
+	<div class="nav-bar" style="margin: 16% 10% 0% 10%;">
+        <a class="column" href="home.html">
+            <img src="resources/home.png" alt="Home" style="width:100%">
+            <span class="nav-element-title">Home</span>
+        </a>
+        <a class="column" href="map.html">
+            <img src="resources/map.png" alt="Maps" style="width:100%">
+            <span class="nav-element-title">Campus Map</span>
+        </a>
+        <a class="column" href="calendar.html">
+            <img src="resources/calendar.png" alt="Events" style="width:100%">
+            <span class="nav-element-title">Events</span>
+        </a>
+        <a class="column" href="officelookup.html">
+            <img src="resources/search.png" alt="Officelookup" style="width:100%">
+            <span class="nav-element-title">Directory Lookup</span>
+        </a>
+        <a class="column" href="floorplan.html">
+            <img src="resources/floorplan3.png" alt="Floorplan" style="width:100%">
+            <span class="nav-element-title">Floorplans</span>
+        </a>
+        <a class="column" href="TutorResources.html">
+            <img src="resources/tutoring2.png" alt="Tutoring" style="width:100%">
+            <span class="nav-element-title">Tutoring Resources</span>
+        </a>
+        <a class="column" href="CareerService.html">
+            <img src="resources/career1.png" alt="Career" style="width:100%">
+            <span class="nav-element-title">Career Services</span>
+        </a>
+
+    </div>
+
+	<script>
+		function myFunction() {
+		  // Declare variables
+		  var input, filter, ul, li, a, i, txtValue;
+		  input = document.getElementById('myInput');
+		  filter = input.value.toUpperCase();
+		  ul = document.getElementById("myUL");
+		  li = ul.getElementsByTagName('li');
+		
+		  // Loop through all list items, and hide those who don't match the search query
+		  for (i = 0; i < li.length; i++) {
+			a = li[i].getElementsByTagName("a")[0];
+			txtValue = a.textContent || a.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			  li[i].style.display = "";
+			} else {
+			  li[i].style.display = "none";
+			}
+		  }
+		}
+
+		function showImage1(){
+          document.getElementById('ground').style.visibility="visible";
+		  document.getElementById('first').style.visibility="hidden";
+		  document.getElementById('other').style.visibility="hidden";
+    	}
+		function showImage2(){
+		  document.getElementById('ground').style.visibility="hidden";
+		  document.getElementById('first').style.visibility="visible";
+		  document.getElementById('other').style.visibility="hidden";
+    	}
+		function showImage3(){
+		  document.getElementById('ground').style.visibility="hidden";
+		  document.getElementById('first').style.visibility="hidden";
+		  document.getElementById('other').style.visibility="visible";
+    	}
+	</script>
+</body>
