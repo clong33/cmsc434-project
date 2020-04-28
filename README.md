@@ -1,5 +1,6 @@
 # cmsc434-project
 A working website for kiosks in the Iribe Center at UMD.
+#### NOTE: If the career service page or the tutor resources page doesn't seem correctly oriented, try zooming in or out of the respective page till you have achieved the correct orientation.
 
 ## Directions for pages
 ### Campus Map
@@ -20,5 +21,3 @@ A working website for kiosks in the Iribe Center at UMD.
 
 ### Career Services
  - All buttons are clickable and lead to outside websites.
-
-#### NOTE: If the career service page or the tutor resources page doesn't seem correctly oriented, try zooming in or out of the respective page till you have achieved the correct orientation.
