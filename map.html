@@ -14,6 +14,21 @@
 <body>
     <input id="searchbox" type="text" placeholder="Search">
     <div id="map"></div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Oops!</h2>
+            </div>
+            <div class="modal-body">
+                <p id="error-message"></p>
+            </div>
+        </div>
+
+    </div>
 
     <div class="nav-bar">
         <a class="column" href="map.html">
@@ -49,6 +64,26 @@
 
 
     <script>
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        var errorParagraph = document.getElementById("error-message")
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
 
         var mapBounds = new google.maps.LatLngBounds({
@@ -137,14 +172,16 @@
                 }
                 markers = []
 
-                directionsRenderer.setDirections({routes: []});
+                directionsRenderer.setDirections({ routes: [] });
 
                 if (typeof infoWindow !== 'undefined' && infoWindow !== null) {
                     infoWindow.close()
                 }
 
                 if (places.length == 0) {
-                    console.log("no places returned")
+                    errorParagraph.innerText = "Your search for " + input.value + " returned 0 results."
+                    modal.style.display = "block";
+
                     return;
                 }
 
@@ -290,12 +327,12 @@
 
 
             map.addListener('click', (mapsMouseEvent) => {
-                
+
                 for (marker of markers) {
                     marker.setMap(null)
                 }
                 markers = []
-                directionsRenderer.setDirections({routes: []});
+                directionsRenderer.setDirections({ routes: [] });
 
                 if (eppleyBounds.contains(mapsMouseEvent.latLng)) {
                     //display popup
