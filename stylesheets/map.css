@@ -130,3 +130,11 @@ a.column {
     background-color: #5cb85c;
     color: white;
   }
+
+  #error-help {
+      font-size: 12px;
+  }
+
+  #error-message {
+      font-size: 16px;
+  }
